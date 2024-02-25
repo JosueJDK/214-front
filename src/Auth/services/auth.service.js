@@ -31,6 +31,23 @@ class AuthService {
       }
     }
   }
+
+  async register(data) {
+    try {
+      const { email, password, name } = data;
+      const response = await this.api.post('/users/register', { email, password, name });
+
+      if (response.data && response.data.code === 201) {
+        return response.data.message;
+      }
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.code === 422) {
+        throw new AuthError(error.response.data.message, 422);
+      } else {
+        throw new AuthError('Servicio no disponible, intentarlo más tarde.', 500);
+      }
+    }
+  }
 }
 
 export default new AuthService();

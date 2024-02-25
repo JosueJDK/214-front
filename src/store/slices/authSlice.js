@@ -7,13 +7,13 @@ const authSlice = createSlice({
         userData: {},
     },
     reducers: {
-        logIn(state, action) {
+        setUserData(state, action) {
             state.userData = action.payload;
             state.login = true;
         }
     }
 });
 
-export const { logIn } = authSlice.actions;
+export const { setUserData } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from "react-redux";
-import { logIn } from "@/store/slices/authSlice";
+import { setUserData } from "@/store/slices/authSlice";
 import authService from "../services/auth.service";
 
 export const SignInComponent = () => {
@@ -23,7 +23,7 @@ export const SignInComponent = () => {
         try{
             if (data.email &&  data.password) {
                 const authUser = await authService.login(data);
-                dispatch(logIn(authUser));
+                dispatch(setUserData(authUser));
                 router.push('/');
             }else {
                 setLoginError(true);
